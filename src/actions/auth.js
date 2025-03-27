@@ -2,6 +2,7 @@
 
 import { getCollection } from "@/lib/db"
 import { RegisterFormSchema } from "@/lib/rules"
+import { createSession } from "@/lib/sessions"
 import bcrypt from "bcrypt"
 import { redirect } from "next/navigation"
 
@@ -48,6 +49,8 @@ export async function register(state, formData) {
   const results = await userCollection.insertOne({ email, password: hashedPassword })
 
   // Create a session
+  await createSession(results.insertedId.toString())
 
+  // Redirect to the dashboard
   redirect("/dashboard")
 }
