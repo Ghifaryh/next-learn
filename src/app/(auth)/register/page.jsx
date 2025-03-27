@@ -13,7 +13,11 @@ export default function Register() {
 			<form action={action} className="space-y-4">
 				<div>
 					<label htmlFor="email">Email</label>
-					<input type="text" name="email" />
+					<input
+						type="text"
+						name="email"
+						defaultValue={state?.email}
+					/>
 					{state?.errors?.email && (
 						<p className="error">{state.errors.email}</p>
 					)}
