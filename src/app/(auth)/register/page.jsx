@@ -49,7 +49,7 @@ export default function Register() {
 						{isPending ? "Loading..." : "Register"}
 					</button>
 
-					<Link href="/" className="text-link">
+					<Link href="/login" className="text-link">
 						or Login here
 					</Link>
 				</div>
