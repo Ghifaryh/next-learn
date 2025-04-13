@@ -8,7 +8,7 @@ import { redirect } from "next/navigation"
 export default async function Dashboard() {
 	const user = await getAuthUser()
 
-	if (!user) return redirect("/") // semi middleware
+	// if (!user) return redirect("/") // semi middleware
 
 	const postCollection = await getCollection("posts")
 	const userPosts = await postCollection
