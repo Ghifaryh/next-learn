@@ -2,7 +2,7 @@ import Link from "next/link"
 
 export default function PostCard({ post }) {
 	return (
-		<div className="border border-slate-400 border-dashed p-4 rounded-md h-full">
+		<div className="border border-slate-400 border-dashed p-4 rounded-md h-full bg-white">
 			<p className="text-slate-600 text-sx">
 				{post._id.getTimestamp().toLocaleString()}
 			</p>

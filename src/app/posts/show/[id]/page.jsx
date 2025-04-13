@@ -7,7 +7,7 @@ export default async function Show({ params }) {
 
 	const postCollection = await getCollection("posts")
 	const post =
-		id.length === 24
+		id.length === 24 // 24 is the length of the id in mongodb
 			? await postCollection?.findOne({
 					_id: ObjectId.createFromHexString(id),
 			  })
