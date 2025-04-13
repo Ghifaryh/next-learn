@@ -1,3 +1,4 @@
+import { deletePost } from "@/actions/posts"
 import { getCollection } from "@/lib/db"
 import getAuthUser from "@/lib/getAuthUser"
 import { ObjectId } from "mongodb"
@@ -50,7 +51,16 @@ export default async function Dashboard() {
 										Edit
 									</Link>
 								</td>
-								<td className="w-1/6 text-red-500">Delete</td>
+								<td className="w-1/6 text-red-500">
+									<form action={deletePost}>
+										<input
+											type="hidden"
+											name="postId"
+											defaultValue={post._id.toString()}
+										/>
+										<button type="submit">Delete</button>
+									</form>
+								</td>
 							</tr>
 						))}
 					</tbody>

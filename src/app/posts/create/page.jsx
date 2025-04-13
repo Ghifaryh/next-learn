@@ -1,4 +1,4 @@
-import { createPosts } from "@/actions/posts"
+import { createPost } from "@/actions/posts"
 import BlogForm from "@/components/BlogForm"
 
 export default async function create() {
@@ -6,7 +6,7 @@ export default async function create() {
 		<div className="container w-1/2">
 			<h1 className="title">Create a new post</h1>
 
-			<BlogForm handler={createPosts} />
+			<BlogForm handler={createPost} />
 		</div>
 	)
 }

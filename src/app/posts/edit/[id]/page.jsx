@@ -1,4 +1,4 @@
-import { updatePosts } from "@/actions/posts"
+import { updatePost } from "@/actions/posts"
 import BlogForm from "@/components/BlogForm"
 import { getCollection } from "@/lib/db"
 import getAuthUser from "@/lib/getAuthUser"
@@ -32,7 +32,7 @@ export default async function Edit({ params }) {
 			<h1 className="title">Edit the post</h1>
 
 			{post ? (
-				<BlogForm handler={updatePosts} post={post} />
+				<BlogForm handler={updatePost} post={post} />
 			) : (
 				<p>Failed to fetch the data</p>
 			)}

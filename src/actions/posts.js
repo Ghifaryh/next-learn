@@ -4,9 +4,10 @@ import { getCollection } from "@/lib/db"
 import getAuthUser from "@/lib/getAuthUser"
 import { BlogPostSchema } from "@/lib/rules"
 import { ObjectId } from "mongodb"
+import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
-export async function createPosts(state, formData) {
+export async function createPost(state, formData) {
 	// Check if user is logged in
 	const user = await getAuthUser()
 	if (!user) return redirect("/login")
@@ -47,7 +48,7 @@ export async function createPosts(state, formData) {
 	redirect("/dashboard")
 }
 
-export async function updatePosts(state, formData) {
+export async function updatePost(state, formData) {
 	// Check if user is logged in
 	const user = await getAuthUser()
 	if (!user) return redirect("/login")
@@ -94,4 +95,27 @@ export async function updatePosts(state, formData) {
 	)
 
 	redirect("/dashboard")
+}
+
+export async function deletePost(formData) {
+	// Check if user is logged in
+	const user = await getAuthUser()
+	if (!user) return redirect("/login")
+
+	// Find the post to delete
+	const postsCollection = await getCollection("posts")
+	const post = await postsCollection.findOne({
+		_id: ObjectId.createFromHexString(formData.get("postId")),
+	})
+
+	// check if the user owns the post
+	if (user.userId !== post.userId.toString()) return redirect("/")
+
+	// Delete the post from the database
+	postsCollection.findOneAndDelete({
+		_id: post._id,
+	})
+
+	revalidatePath("/dashboard") // instead of redirecting to dashboard use revalidatePath
+	// its purging the cache and revalidating the data
 }
